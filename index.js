@@ -1,14 +1,20 @@
-const fs = require('fs'); //подключение модуля File System
-const data = `
-    hello from NodeJS
-    I am random text
-`;
+const express = require('express'); // веб сервер
 
-fs.writeFileSync('nodejs.txt', data); //создание файла и запись в него данных (Sync - синхронно)
+const app = express(); // запуск сервера
 
-const result = fs.readFileSync('nodejs.txt', { // чтение файла возвращает значение (Sync - синхронно)
-    encoding: 'utf-8' //формат
-}); 
+// устанавливаем стандартное расширение для рендера ejs
+app.set('view engine', 'ejs'); // view engine движок отвечающий за рендер страниц 
 
-console.log(__dirname); // путь до файла
-console.log(__filename);  // путь до файла с файлом
+// позволяет исп-ть доп опции
+app.use(
+    express.static('public') // указываем путь к файлам с статикой
+);
+
+//по умлч node смотрит в папку views и ищет там index.ejs
+app.get('/', (request, response) => { // при get запросе
+    response.render('index'); // мы рендерим файл index с раширение ejs
+});
+
+app.listen(8000, () => { // конфигурация сервера
+    console.log('Server started on port 8000');
+});

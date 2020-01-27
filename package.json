@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-basic",
+  "version": "0.0.1",
+  "description": "this is nodeJs basics cource",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "prod": "node index.js"
+  },
+  "author": "Pavel Tankovich",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.0.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
