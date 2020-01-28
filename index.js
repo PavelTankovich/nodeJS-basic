@@ -19,20 +19,20 @@ app.use(
 );
 
 //обработка GET запроса
-//request.params получает данные с get запроса
+//request.params получает данные с get запроса(запрос по url сайта)
 //по умлч node смотрит в папку views и ищет там index.ejs
 app.get('/', (request, response) => { // при get запросе
-    response.render('index'); // мы рендерим файл index с раширение ejs
+    response.render( 'index', { weather: null, error: null } ); // мы рендерим файл index с раширение ejs
 });
 
 //обработка GET запроса
 //request.body получает данные с post запроса
-app.post('/', (request, response) => {
+app.post('/', async (request, response) => {
     const { city } = request.body; 
 
-    weatherRequest(city);
+    const { weather, error } = await weatherRequest(city);
 
-    response.render('index')
+    response.render( 'index', { weather, error } )
 });
 
 app.listen(8000, () => { // конфигурация сервера
